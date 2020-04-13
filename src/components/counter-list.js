@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CounterList(props) {
+const CounterList = props => {
   const tdList = props.countList.map((v, i) => {
     return <td key={i}>{v}</td>;
   });
