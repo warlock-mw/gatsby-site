@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CounterList from '@/components/counter-list';
+import CounterList from '@/components/counter/counter-list';
 
 function changeCount(baseNum, num) {
   let count = baseNum + num;
