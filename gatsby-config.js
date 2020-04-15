@@ -42,6 +42,7 @@ module.exports = {
         refreshId: `id`,
         verboseOutput: true,
         skipCreateNode: false,
+        auth: false,
       }
     }
   ],

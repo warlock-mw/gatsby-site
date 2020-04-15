@@ -1,49 +1,58 @@
 import React from 'react';
-import { graphql } from 'gatsby';
+import { useStaticQuery, graphql } from 'gatsby';
 
-const List = ({data}) => {
+import styles from '@/scss/qiita.module.scss';
+import { node } from 'prop-types';
+
+const List = () => {
+  const data = useStaticQuery(
+    graphql`
+      query {
+        allInternalQiita {
+          edges {
+            node {
+              user {
+                alternative_id
+              }
+              title
+              url
+            }
+          }
+        }
+      }
+    `
+  );
+
+  const edges = data.allInternalQiita.edges.filter(
+    ({ node }) => node.title !== null
+  );
+
   return (
     <div>
-      <p><button type="button" onClick={handle.updateListAsync}>データ取得</button></p>
-
-      {data.postList.length > 0 ? (
-        <table className={styles.QiitaTable}>
-          <thead>
-            <tr>
-              <th>ユーザー</th>
-              <th>タイトル</th>
-              <th>ページ</th>
+      <table className={styles.QiitaTable}>
+        <thead>
+          <tr>
+            <th>ユーザー</th>
+            <th>タイトル</th>
+            <th>ページ</th>
           </tr>
-          </thead>
-          <tbody>
-            {data.postList.map((v, i) => (
-              <tr key={i}>
-                <td>{v.user}</td>
-                <td>{v.title}</td>
-                <td><a href={v.url} target="_blank" rel="noopener noreferrer">ページ</a></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <p>データがありません</p>
-      )}
+        </thead>
+        <tbody>
+          {edges.map(({ node }, i) => (
+            <tr key={i}>
+              <td>{node.user.alternative_id}</td>
+              <td>{node.title}</td>
+              <td>
+                <a href={node.url} target="_blank" rel="noopener noreferrer">
+                  ページ
+                </a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
 
-export const query = graphql`
-  query {
-    allInternalQiita {
-      edges {
-        node {
-          user {
-            alternative_id
-          }
-          title
-          url
-        }
-      }
-    }
-  }
-`;
+export default List;
