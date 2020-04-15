@@ -45,6 +45,8 @@ module.exports = {
         auth: false,
       }
     },
-    "gatsby-source-qiita-items"
+    {
+      resolve: "gatsby-source-qiita-items"
+    }
   ],
 }
