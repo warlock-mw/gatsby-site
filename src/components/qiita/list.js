@@ -2,7 +2,6 @@ import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import styles from '@/scss/qiita.module.scss';
-import { node } from 'prop-types';
 
 const List = () => {
   const data = useStaticQuery(

@@ -44,6 +44,7 @@ module.exports = {
         skipCreateNode: false,
         auth: false,
       }
-    }
+    },
+    "gatsby-source-qiita-items"
   ],
 }
