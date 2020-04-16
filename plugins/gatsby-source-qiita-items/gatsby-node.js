@@ -5,7 +5,7 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
   const res = await axios.get("https://qiita.com/api/v2/items")
 
   res.data.forEach(val => {
-    const node = {
+    const nodeMetadata = {
       id: createNodeId(getUniqueStr()),
       internal: {
         contentDigest: createContentDigest(val),
@@ -13,8 +13,11 @@ exports.sourceNodes = async ({ actions, createContentDigest, createNodeId }) => 
         type: "internal__qiita_items",
         content: JSON.stringify(val),
       },
-      title: val.title,
     }
+
+    val.org_id = val.id
+    
+    const node = Object.assign({}, val, nodeMetadata)
   
     createNode(node)
   });
