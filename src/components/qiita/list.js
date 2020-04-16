@@ -7,14 +7,14 @@ const List = () => {
   const data = useStaticQuery(
     graphql`
       query {
-        allInternalQiita {
+        allInternalQiitaItems {
           edges {
             node {
-              user {
-                alternative_id
-              }
               title
               url
+              user {
+                id
+              }
             }
           }
         }
@@ -22,10 +22,7 @@ const List = () => {
     `
   );
 
-  const edges = data.allInternalQiita.edges.filter(
-    ({ node }) => node.title !== null
-  );
-
+  const { edges } = data.allInternalQiitaItems;
   return (
     <div>
       <table className={styles.QiitaTable}>
@@ -39,7 +36,7 @@ const List = () => {
         <tbody>
           {edges.map(({ node }, i) => (
             <tr key={i}>
-              <td>{node.user.alternative_id}</td>
+              <td>{node.user.id}</td>
               <td>{node.title}</td>
               <td>
                 <a href={node.url} target="_blank" rel="noopener noreferrer">

@@ -28,23 +28,6 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`,
       },
     },
-    {
-      resolve: "gatsby-source-apiserver",
-      options: {
-        typePrefix: "internal__",
-        url: `https://qiita.com/api/v2/items`,
-        method: "get",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        name: `qiita`,
-        entityLevel: ``,
-        refreshId: `id`,
-        verboseOutput: true,
-        skipCreateNode: false,
-        auth: false,
-      }
-    },
     "gatsby-source-qiita-items"
   ],
 }
