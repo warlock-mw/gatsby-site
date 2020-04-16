@@ -1,13 +1,13 @@
 import React from "react";
 
 import Layout from "@/components/layout";
-import List from '@/components/qiita/List';
+import Node from '@/components/graph/node';
 
 const QiitaPage = () => {
   return (
     <Layout>
-      <p>Qiita</p>
-      <List />
+      <p>グラフ</p>
+      <Node />
     </Layout>
   )
 }
